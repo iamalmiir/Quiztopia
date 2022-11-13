@@ -13,7 +13,7 @@ class StartPage(Page):
                 text=level,
                 x=space_between_buttons,
                 y=280,
-                font_size=8,
+                font_size=12,
                 command=lambda: self.quit(),
                 fg=level == "Easy"
                 and self.SUCCESS_COLOR

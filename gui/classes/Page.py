@@ -71,6 +71,7 @@ class Page(tk.Frame):
             background=self.BG_COLOR,
             highlightbackground=self.FG_COLOR,
             highlightthickness=2,
+            bd=bd,
             command=command,
             activebackground=self.ACTIVE_BG_COLOR,
             activeforeground=fg,
