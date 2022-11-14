@@ -1,9 +1,11 @@
+from os import getenv
+from time import sleep
+
 import requests
 from colorama import Fore
 from dotenv import load_dotenv
+
 from lib import Helper
-from os import getenv
-from time import sleep
 
 load_dotenv()
 url = "https://ases-quiz-api1.p.rapidapi.com/questions/random/20"
@@ -20,6 +22,11 @@ class QuizGame:
         self.questions = list()
         self.correct_answer = int()
         self.score = 0
+        self.levels_points = {
+            "Easy": 1,
+            "Medium": 2,
+            "Hard": 3,
+        }
 
     def get_questions(self):
         questions_list = requests.request("GET", url, headers=headers)
@@ -32,6 +39,8 @@ class QuizGame:
                 Fore.GREEN
                 + f"You are correct! The answer is: {question['options'][self.correct_answer]['option']}"
             )
+            self.score += self.levels_points.get(question["difficulty"]["degree"])
+            print(self.levels_points.get(question["difficulty"]["degree"]))
         else:
             print(
                 Fore.RED
@@ -63,3 +72,4 @@ class QuizGame:
                 except ValueError:
                     print(Fore.YELLOW + "Invalid answer. Please enter a number between 1 and 4")
                     continue
+        print(self.score)
