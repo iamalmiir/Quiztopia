@@ -1,7 +1,5 @@
-from colorama import init, Fore, Back, Style
-from lib import colorize
-import requests
-from questions import Question
+from colorama import init
+from questions import QuizGame
 from dotenv import load_dotenv
 from os import getenv
 
@@ -14,27 +12,8 @@ headers = {
     "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
 }
 
-quiz = Question()
-quiz.get_questions()
 
-for question in quiz.questions["questions"]:
-    print(question["text"])
-    question_option = 1
-    correct_answer = str()
-    for option in question["options"]:
-        print(Fore.CYAN + f"{question_option}. {option['option']}")
-        if option["isCorrect"]:
-            correct_answer = question_option - 1
-        question_option += 1
-    while True:
-        print("Enter your answer (1-4):")
-        print(correct_answer)
-        user_answer = int(input(Fore.CYAN + ":> "))
-        if question["options"][user_answer - 1]["isCorrect"]:
-            print(
-                Fore.GREEN
-                + f"You are correct! The answer is: {question['options'][correct_answer]['option']}"
-            )
-            break
-        else:
-            break
+if __name__ == "__main__":
+    quiz = QuizGame()
+    quiz.get_questions()
+    quiz.start_quiz()
