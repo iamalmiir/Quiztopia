@@ -1,4 +1,5 @@
 from colorama import init
+
 from questions import QuizGame
 
 init(autoreset=True)

@@ -5,7 +5,7 @@ import requests
 from colorama import Fore
 from dotenv import load_dotenv
 
-from lib import Helper
+from lib import clear
 
 load_dotenv()
 url = "https://ases-quiz-api1.p.rapidapi.com/questions/random/20"
@@ -13,8 +13,6 @@ headers = {
     "X-RapidAPI-Key": getenv("X-RapidAPI-Key"),
     "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
 }
-
-helper = Helper()
 
 
 class QuizGame:
@@ -59,7 +57,7 @@ class QuizGame:
         self.total_score += self.levels_points.get(question["difficulty"]["degree"])
 
     def start_quiz(self):
-        helper.clear()
+        clear()
         for question in self.questions["questions"]:
             print(question["text"])
             question_option = 1
@@ -79,7 +77,7 @@ class QuizGame:
 
                     self.validate_answer(question, user_answer)
                     sleep(2)
-                    helper.clear()
+                    clear()
                     break
                 except ValueError:
                     print(Fore.YELLOW + "Invalid answer. Please enter a number between 1 and 4")
