@@ -1,13 +1,12 @@
 from colorama import init
 
-from questions import QuizGame
+from questions import App
 
 init(autoreset=True)
 
 if __name__ == "__main__":
     try:
-        quiz = QuizGame()
-        quiz.get_questions()
-        quiz.start_quiz()
+        app = App()
+        app.start()
     except KeyboardInterrupt:
         print("\nBye!")

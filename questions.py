@@ -28,6 +28,14 @@ class QuizGame:
             "Medium": 2,
             "Hard": 3,
         }
+        self.categories = {
+            "Sport": getenv("SPORT_ID"),
+            "Art & Literature": getenv("ART_AND_LITERATURE_ID"),
+            "Geography": getenv("63357abb3ab81af9ad154eb0"),
+            "General Knowledge": getenv("GENERAL_KNOWLEDGE_ID"),
+            "History": getenv("HISTORY_ID"),
+            "Science & Nature": getenv("SCIENCE_AND_NATURE_ID"),
+        }
 
     def get_questions(self):
         questions_list = requests.request("GET", url, headers=headers)
@@ -41,7 +49,6 @@ class QuizGame:
                 + f"You are correct! The answer is: {question['options'][self.correct_answer]['option']}"
             )
             self.score += self.levels_points.get(question["difficulty"]["degree"])
-            # TODO: Add points to score
             self.answered_correctly += 1
             print(
                 Fore.GREEN
@@ -56,8 +63,21 @@ class QuizGame:
             )
         self.total_score += self.levels_points.get(question["difficulty"]["degree"])
 
+    def set_up_quiz(self):
+        categories_count = 1
+        print("Please pick one of the following categories:")
+        for category in self.categories:
+            print(Fore.CYAN + f"{categories_count}. {category}")
+            categories_count += 1
+        user_pick = int(input(Fore.CYAN + ":> ")) - 1
+        if user_pick < 0 or user_pick > 5:
+            raise ValueError
+
+        self.categories = list(self.categories.values())[user_pick]
+
     def start_quiz(self):
         clear()
+        # self.set_up_quiz()
         for question in self.questions["questions"]:
             print(question["text"])
             question_option = 1
@@ -86,3 +106,13 @@ class QuizGame:
         print(Fore.GREEN + f"You answered {self.answered_correctly} questions correctly")
         print(Fore.RED + f"You answered {self.answered_incorrectly} questions incorrectly")
         print(Fore.CYAN + f"Your final score is: {self.score}/{self.total_score}")
+
+
+class App(QuizGame):
+    def __init__(self):
+        super().__init__()
+
+    def start(self):
+        self.set_up_quiz()
+        self.get_questions()
+        self.start_quiz()
