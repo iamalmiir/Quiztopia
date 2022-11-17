@@ -1,8 +1,4 @@
-from colorama import init
-
-from questions import App
-
-init(autoreset=True)
+from src.App import App
 
 if __name__ == "__main__":
     try:

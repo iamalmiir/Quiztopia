@@ -2,13 +2,13 @@ from os import getenv
 from time import sleep
 
 import requests
-from colorama import Fore
+from colorama import Fore, init
 from dotenv import load_dotenv
 
-from lib import clear
+from src.lib import clear
 
 load_dotenv()
-url = "https://ases-quiz-api1.p.rapidapi.com/questions/random/20"
+init(autoreset=True)
 headers = {
     "X-RapidAPI-Key": getenv("X-RapidAPI-Key"),
     "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
@@ -31,13 +31,14 @@ class QuizGame:
         self.categories = {
             "Sport": getenv("SPORT_ID"),
             "Art & Literature": getenv("ART_AND_LITERATURE_ID"),
-            "Geography": getenv("63357abb3ab81af9ad154eb0"),
+            "Geography": getenv("GEOGRAPHY_ID"),
             "General Knowledge": getenv("GENERAL_KNOWLEDGE_ID"),
             "History": getenv("HISTORY_ID"),
             "Science & Nature": getenv("SCIENCE_AND_NATURE_ID"),
         }
 
     def get_questions(self):
+        url = f"https://ases-quiz-api1.p.rapidapi.com/questions/random/category/{self.categories}"
         questions_list = requests.request("GET", url, headers=headers)
         self.questions = questions_list.json()
         return self.questions["questions"]
@@ -72,7 +73,7 @@ class QuizGame:
         user_pick = int(input(Fore.CYAN + ":> ")) - 1
         if user_pick < 0 or user_pick > 5:
             raise ValueError
-
+        print("You have selected: " + Fore.GREEN + f"{list(self.categories.keys())[user_pick]}")
         self.categories = list(self.categories.values())[user_pick]
 
     def start_quiz(self):
@@ -103,16 +104,16 @@ class QuizGame:
                     print(Fore.YELLOW + "Invalid answer. Please enter a number between 1 and 4")
                     continue
 
-        print(Fore.GREEN + f"You answered {self.answered_correctly} questions correctly")
-        print(Fore.RED + f"You answered {self.answered_incorrectly} questions incorrectly")
-        print(Fore.CYAN + f"Your final score is: {self.score}/{self.total_score}")
-
-
-class App(QuizGame):
-    def __init__(self):
-        super().__init__()
-
-    def start(self):
-        self.set_up_quiz()
-        self.get_questions()
-        self.start_quiz()
+        print(
+            Fore.GREEN
+            + f"You have answered {self.answered_correctly} questions correctly"
+            + Fore.CYAN
+            + " & "
+            + Fore.RED
+            + f"{self.answered_incorrectly} questions incorrectly."
+        )
+        print("----------------------------------------")
+        print(
+            Fore.CYAN
+            + f"You have earned {self.score} points out of {self.total_score} possible points."
+        )
