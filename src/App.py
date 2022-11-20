@@ -1,4 +1,5 @@
 from src.Quiz import QuizGame
+from src.SetupQuiz import SetupQuiz
 
 
 class App(QuizGame):
@@ -6,6 +7,6 @@ class App(QuizGame):
         super().__init__()
 
     def start(self):
-        self.set_up_quiz()
-        # self.get_questions()
+        quiz_setup = SetupQuiz()
+        quiz_setup.main()
         self.start_quiz()

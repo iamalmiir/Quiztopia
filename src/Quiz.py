@@ -28,6 +28,7 @@ class QuizGame:
             "Medium": 2,
             "Hard": 3,
         }
+
         self.categories = {
             "Sport": getenv("SPORT_ID"),
             "Art & Literature": getenv("ART_AND_LITERATURE_ID"),
@@ -58,17 +59,17 @@ class QuizGame:
             )
         self.total_score += self.levels_points.get(question["difficulty"]["degree"])
 
-    def set_up_quiz(self):
-        categories_count = 1
-        print("Please pick one of the following categories:")
-        for category in self.categories:
-            print(Fore.CYAN + f"{categories_count}. {category}")
-            categories_count += 1
-        user_pick = int(input(Fore.CYAN + ":> ")) - 1
-        if user_pick < 0 or user_pick > 5:
-            raise ValueError
-        print("You have selected: " + Fore.GREEN + f"{list(self.categories.keys())[user_pick]}")
-        self.categories = list(self.categories.values())[user_pick]
+    # def set_up_quiz(self):
+    #     categories_count = 1
+    #     print("Please pick one of the following categories:")
+    #     for category in self.categories:
+    #         print(Fore.CYAN + f"{categories_count}. {category}")
+    #         categories_count += 1
+    #     user_pick = int(input(Fore.CYAN + ":> ")) - 1
+    #     if user_pick < 0 or user_pick > 5:
+    #         raise ValueError
+    #     print("You have selected: " + Fore.GREEN + f"{list(self.categories.keys())[user_pick]}")
+    #     self.categories = list(self.categories.values())[user_pick]
 
     def start_quiz(self):
         clear()
