@@ -7,5 +7,5 @@ class App(QuizGame):
 
     def start(self):
         self.set_up_quiz()
-        self.get_questions()
+        # self.get_questions()
         self.start_quiz()

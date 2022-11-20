@@ -1,10 +1,10 @@
 from os import getenv
 from time import sleep
 
-import requests
 from colorama import Fore, init
 from dotenv import load_dotenv
 
+from src.Questions import Questions
 from src.lib import clear
 
 load_dotenv()
@@ -36,12 +36,6 @@ class QuizGame:
             "History": getenv("HISTORY_ID"),
             "Science & Nature": getenv("SCIENCE_AND_NATURE_ID"),
         }
-
-    def get_questions(self):
-        url = f"https://ases-quiz-api1.p.rapidapi.com/questions/random/category/{self.categories}"
-        questions_list = requests.request("GET", url, headers=headers)
-        self.questions = questions_list.json()
-        return self.questions["questions"]
 
     def validate_answer(self, question, answer):
         if question["options"][answer]["isCorrect"]:
@@ -78,8 +72,10 @@ class QuizGame:
 
     def start_quiz(self):
         clear()
-        # self.set_up_quiz()
-        for question in self.questions["questions"]:
+        print(Fore.CYAN + "Welcome to the quiz game!")
+        questions = Questions()
+        questions.get_questions(self.categories)
+        for question in questions.all_questions:
             print(question["text"])
             question_option = 1
 
