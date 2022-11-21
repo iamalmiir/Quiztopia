@@ -2,8 +2,8 @@ from time import sleep
 
 from colorama import Fore, init
 
-from src.SetupQuiz import SetupQuiz
-from src.ProcessAnswers import ProcessAnswers
+from src.classes.SetupQuiz import SetupQuiz
+from src.classes.ProcessAnswers import ProcessAnswers
 from src.lib import clear
 
 init(autoreset=True)

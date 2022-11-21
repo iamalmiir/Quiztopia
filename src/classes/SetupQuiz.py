@@ -1,6 +1,6 @@
 from colorama import Fore
 
-from src.Questions import Questions
+from src.classes.Questions import Questions
 from src.constants import CATEGORIES
 
 

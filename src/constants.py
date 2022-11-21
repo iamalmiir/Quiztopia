@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-headers = {
+HEADERS = {
     "X-RapidAPI-Key": getenv("X-RapidAPI-Key"),
     "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
 }

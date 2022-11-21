@@ -1,13 +1,5 @@
-from os import getenv
-
-from dotenv import load_dotenv
+from src.constants import HEADERS
 from requests import request
-
-load_dotenv()
-headers = {
-    "X-RapidAPI-Key": getenv("X-RapidAPI-Key"),
-    "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
-}
 
 
 class Questions:
@@ -16,6 +8,5 @@ class Questions:
 
     def get_questions(self, category) -> list:
         url = f"https://ases-quiz-api1.p.rapidapi.com/questions/random/category/{category}"
-        questions_list = request("GET", url, headers=headers)
-        self.all_questions = questions_list.json()
+        self.all_questions = request("GET", url, headers=HEADERS).json()
         return self.all_questions["questions"]

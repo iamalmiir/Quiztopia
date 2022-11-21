@@ -1,4 +1,4 @@
-from src.Quiz import QuizGame
+from src.classes.Quiz import QuizGame
 
 
 class App(QuizGame):
