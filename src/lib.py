@@ -5,5 +5,4 @@ def clear():
     if os_name == "nt":
         system("cls")
     else:
-        print("run")
         system("clear")
