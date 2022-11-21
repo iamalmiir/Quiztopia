@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-HEADERS = {
+HEADERS: dict = {
     "X-RapidAPI-Key": getenv("X-RapidAPI-Key"),
     "X-RapidAPI-Host": getenv("X-RapidAPI-Host"),
 }
 
-CATEGORIES = {
+CATEGORIES: dict = {
     "Sport": getenv("SPORT_ID"),
     "Art & Literature": getenv("ART_AND_LITERATURE_ID"),
     "Geography": getenv("GEOGRAPHY_ID"),

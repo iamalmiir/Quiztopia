@@ -10,27 +10,28 @@ init(autoreset=True)
 
 
 class QuizGame(SetupQuiz):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         # Set the category picked by the user
-        self.category = self.set_category()
-        # Fetch the questions from the API with choosen category
-        self.questions = self.get_questions(self.category)
+        self.category: str = self.set_category()
+        # Fetch the questions from the API with chosen category
+        self.questions: list = self.get_questions(self.category)
 
         # Game variables
-        self.score = 0
-        self.total_score = 0
-        self.correct_answer = int()
-        self.answered_correctly = 0
-        self.answered_incorrectly = 0
+        self.score: int = int()
+        self.total_score: int = int()
+        self.correct_answer: int = int()
+        self.answered_correctly: int = int()
+        self.answered_incorrectly: int = int()
 
-    def start_quiz(self):
+    def start_quiz(self) -> None:
         clear()
-        answer = ProcessAnswers()
+        # assigned ProcessAnswers class to a variable and specified the type
+        answer: ProcessAnswers = ProcessAnswers()
         print(Fore.CYAN + "Welcome to the quiz game!")
         for question in self.questions:
             print(question["text"])
-            question_option = 1
+            question_option: int = 1
 
             for option in question["options"]:
                 print(Fore.CYAN + f"{question_option}. {option['option']}")
@@ -54,7 +55,7 @@ class QuizGame(SetupQuiz):
                         self.answered_incorrectly += 1
                         answer.incorrect_answer_message()
                     self.total_score += answer.points_earned
-                    sleep(2)
+                    sleep(0)
                     clear()
                     break
                 except ValueError:

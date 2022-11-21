@@ -1,7 +1,7 @@
 from os import system, name as os_name
 
 
-def clear():
+def clear() -> None:
     if os_name == "nt":
         system("cls")
     else:

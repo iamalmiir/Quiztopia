@@ -2,13 +2,13 @@ from colorama import Fore
 
 
 class ProcessAnswers:
-    def __init__(self):
-        self.current_answer = int()
-        self.correct_answer = int()
-        self.points_earned = int()
-        self.current_score = int()
-        self.current_question = dict()
-        self.level_points = {
+    def __init__(self) -> None:
+        self.current_answer: int = int()
+        self.correct_answer: int = int()
+        self.points_earned: int = int()
+        self.current_score: int = int()
+        self.current_question: dict = dict()
+        self.level_points: dict = {
             "Easy": 1,
             "Medium": 2,
             "Hard": 3,
