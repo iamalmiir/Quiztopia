@@ -1,29 +1,24 @@
-from os import getenv
-
 from colorama import Fore
 
+from src.Questions import Questions
+from src.constants import CATEGORIES
 
-class SetupQuiz:
-    def __init__(self) -> None:
-        self.categories_count = 1
-        self.categories = {
-            "Sport": getenv("SPORT_ID"),
-            "Art & Literature": getenv("ART_AND_LITERATURE_ID"),
-            "Geography": getenv("GEOGRAPHY_ID"),
-            "General Knowledge": getenv("GENERAL_KNOWLEDGE_ID"),
-            "History": getenv("HISTORY_ID"),
-            "Science & Nature": getenv("SCIENCE_AND_NATURE_ID"),
-        }
 
-    def main(self):
+class SetupQuiz(Questions):
+    def __init__(self):
+        super().__init__()
+        self.categories = CATEGORIES
+
+    def set_category(self) -> str:
         print("Please pick one of the following categories:")
+        categories_count = 1
         for category in self.categories:
-            print(Fore.CYAN + f"{self.categories_count}. {category}")
-            self.categories_count += 1
+            print(Fore.CYAN + f"{categories_count}. {category}")
+            categories_count += 1
 
         user_pick = int(input(Fore.CYAN + ":> ")) - 1
         if user_pick < 0 or user_pick > 5:
             raise ValueError
 
         print("You have selected: " + Fore.GREEN + f"{list(self.categories.keys())[user_pick]}")
-        self.categories = list(self.categories.values())[user_pick]
+        return list(self.categories.values())[user_pick]
