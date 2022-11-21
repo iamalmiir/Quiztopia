@@ -2,8 +2,8 @@ from time import sleep
 
 from colorama import Fore, init
 
-from src.classes.SetupQuiz import SetupQuiz
 from src.classes.ProcessAnswers import ProcessAnswers
+from src.classes.SetupQuiz import SetupQuiz
 from src.lib import clear
 
 init(autoreset=True)
@@ -26,7 +26,6 @@ class QuizGame(SetupQuiz):
 
     def start_quiz(self) -> None:
         clear()
-        # assigned ProcessAnswers class to a variable and specified the type
         answer: ProcessAnswers = ProcessAnswers()
         print(Fore.CYAN + "Welcome to the quiz game!")
         for question in self.questions:
@@ -55,7 +54,7 @@ class QuizGame(SetupQuiz):
                         self.answered_incorrectly += 1
                         answer.incorrect_answer_message()
                     self.total_score += answer.points_earned
-                    sleep(0)
+                    sleep(2)
                     clear()
                     break
                 except ValueError:

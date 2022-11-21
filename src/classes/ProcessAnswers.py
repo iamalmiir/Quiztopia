@@ -15,7 +15,7 @@ class ProcessAnswers:
         }
 
     def set_values(
-        self, current_question: dict, current_answer: int, correct_answer: int, current_score: int
+            self, current_question: dict, current_answer: int, correct_answer: int, current_score: int
     ) -> None:
         self.current_question = current_question
         self.current_answer = current_answer

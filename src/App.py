@@ -5,5 +5,5 @@ class App(QuizGame):
     def __init__(self) -> None:
         super().__init__()
 
-    def start(self):
+    def start(self) -> None:
         self.start_quiz()
