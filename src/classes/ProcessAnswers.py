@@ -15,7 +15,7 @@ class ProcessAnswers:
         }
 
     def set_values(
-            self, current_question: dict, current_answer: int, correct_answer: int, current_score: int
+        self, current_question: dict, current_answer: int, correct_answer: int, current_score: int
     ) -> None:
         self.current_question = current_question
         self.current_answer = current_answer
@@ -36,10 +36,7 @@ class ProcessAnswers:
             + f"The correct answer is: {self.current_question['options'][self.correct_answer]['option']}"
         )
         print(Fore.YELLOW + f"You have earned {self.points_earned} points.")
-        print(Fore.CYAN + f"Your current score is: {self.current_score}")
 
     def incorrect_answer_message(self) -> None:
         print(Fore.RED + f"The correct answer is: ", end="")
         print(Fore.GREEN + f"{self.current_question['options'][self.correct_answer]['option']}")
-
-        print(Fore.CYAN + f"Your current score is: {self.current_score}")

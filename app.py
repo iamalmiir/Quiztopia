@@ -6,7 +6,7 @@ if __name__ == "__main__":
         clear()
         app: App = App()
         app.start()
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or EOFError:
         clear()
         print("Thanks for playing!")
         exit()

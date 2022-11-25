@@ -29,6 +29,8 @@ class QuizGame(SetupQuiz):
         answer: ProcessAnswers = ProcessAnswers()
         print(Fore.CYAN + "Welcome to the quiz game!")
         for question in self.questions:
+            print(Fore.CYAN + f"Category: {self.category}", end="")
+            print(Fore.CYAN + f"  Current Score: {self.score}")
             print(question["text"])
             question_option: int = 1
 
@@ -41,6 +43,7 @@ class QuizGame(SetupQuiz):
             print("Enter your answer (1-4)")
             while True:
                 try:
+
                     user_answer = int(input(Fore.CYAN + ":> ")) - 1
                     if user_answer < 0 or user_answer > 3:
                         raise ValueError
