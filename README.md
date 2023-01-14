@@ -2,7 +2,7 @@
 <br/>
 <br/>
 
-- Project Title: Quizler
+- Project Title: Quiztopia
 - Programing Language: Python
 
 ## Instalation
